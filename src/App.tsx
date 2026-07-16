@@ -1,3 +1,4 @@
+import { saveWorkouts, loadWorkouts } from "./utils/storage";
 import Navbar from './components/Navbar'
 import {
     BrowserRouter as Router,
@@ -9,6 +10,8 @@ import Workout from "./pages/Workout";
 
 
 const App = () =>{
+          console.log("nani", typeof(loadWorkouts()))
+
   return (
     <Router>
       <Navbar />
