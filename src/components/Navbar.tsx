@@ -1,25 +1,27 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import type { NavbarProps } from "../types/fighter-training-tracker.interface";
-const Navbar = ({}: NavbarProps
+import logo from "../assets/29019565-576f-4182-8ccf-6242866a2ba9.png";
+import Add from "./Add";
+
+const Navbar = ({ 
+    handleOpenModal, 
+    isOpen, 
+    setIsOpen, 
+    handleCloseModal, 
+    formData,
+    setFormData,
+    workouts,
+    setWorkouts,
+    handleSubmitForm
+}: NavbarProps
 ) => {
+
     return(
         <nav>
-            <header className="flex justify-around bg-zinc-200 px-6 py-4 gap-15">
-            <h1 className="text-2xl font-bold flex-start text-zinc-800"><Link to="/">Fighter Training Tracker</Link></h1>
+            <header className="flex justify-around bg-zinc-200 p-0 gap-12">
+            <img className="h-32 w-21 p-0 object-contain"src={logo}/>
             <ul className="flex items-center gap-8 text-base mt-1">
-            <li><Button text="Add Button"
-            className="
-            bg-violet-600
-            hover:bg-violet-500
-            text-white
-            rounded-lg
-            px-4
-            py-2
-            transition-colors
-            duration-300
-            "
-            /></li>    
             <li
             className="
             relative
@@ -70,9 +72,42 @@ const Navbar = ({}: NavbarProps
             hover:after:w-full
             ">
             <Link to="/workout">Workouts</Link></li>
+            
+            <li>
+                <Button 
+                    text="Add Workout"
+                    className="
+                    bg-violet-600
+                    hover:bg-violet-500
+                    text-white
+                    rounded-lg
+                    px-4
+                    py-2
+                    transition-colors
+                    duration-300
+                    "
+                    onClick={handleOpenModal}
+                    formData={formData}
+                    setFormData={setFormData}
+                    workouts={workouts}
+                    setWorkouts={setWorkouts}
+                />
+                {/* Conditional rendering based on state */}
+                {isOpen && (
+                    <Add 
+                        isOpen={isOpen}
+                        handleCloseModal={handleCloseModal}
+                        setIsOpen={setIsOpen}
+                        formData={formData}
+                        setFormData={setFormData}
+                        handleSubmitForm={handleSubmitForm}
+                    />
+                )}
+            </li>
             </ul>
             </header>
         </nav>
+        
     )
 }
 
